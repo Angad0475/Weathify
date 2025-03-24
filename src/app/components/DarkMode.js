@@ -1,12 +1,19 @@
-"use client";
+'use client';
 import React, { useState, useEffect } from "react";
-import 'boxicons';
-// Keeping your CSS variables
 
 const DarkMode = () => {
-    const [darkMode, setDarkMode] = useState(
-        localStorage.getItem("theme") === "dark"
-    );
+    const [darkMode, setDarkMode] = useState(false);
+
+    useEffect(() => {
+        const storedTheme = localStorage.getItem("theme");
+        if (storedTheme === "dark") {
+            setDarkMode(true);
+            document.documentElement.setAttribute("data-theme", "dark");
+        } else {
+            setDarkMode(false);
+            document.documentElement.setAttribute("data-theme", "light");
+        }
+    }, []);
 
     useEffect(() => {
         if (darkMode) {
